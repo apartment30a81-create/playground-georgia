@@ -1,0 +1,2317 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground Georgia • ფლეიგრაუნდ ჯორჯია — ბავშვთა სათამაშო მოედნები & სპორტული მოედნები</title>
+    <meta name="description" content="Playground Georgia — ბავშვთა სათამაშო მოედნების, სპორტული კომპლექსების და რეზინის საფარების მონტაჟი საქართველოში. თბილისი, საქართველო.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* =============================================
+           CSS CUSTOM PROPERTIES
+           ============================================= */
+        :root {
+            --primary: #1a56db;
+            --primary-dark: #1442ab;
+            --primary-light: #3b73f5;
+            --accent: #f59e0b;
+            --accent-dark: #d97706;
+            --accent-light: #fbbf24;
+            --dark-900: #0f172a;
+            --dark-800: #111827;
+            --dark-700: #1e293b;
+            --dark-600: #334155;
+            --gray-500: #6b7280;
+            --gray-400: #9ca3af;
+            --gray-300: #d1d5db;
+            --gray-200: #e5e7eb;
+            --gray-100: #f3f4f6;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+            --transition-fast: 0.15s ease;
+            --transition-base: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            --font-family: 'Noto Sans Georgian', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* =============================================
+           RESET & BASE
+           ============================================= */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--white);
+            color: var(--dark-800);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* =============================================
+           UTILITY CLASSES
+           ============================================= */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            padding: 0.4rem 1rem;
+            border-radius: var(--radius-full);
+            margin-bottom: 1rem;
+        }
+
+        .section-tag.dark {
+            color: var(--accent-light);
+            background: rgba(245, 158, 11, 0.15);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .section-title {
+            font-size: clamp(1.875rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            color: var(--dark-900);
+            margin-bottom: 1rem;
+        }
+
+        .section-title.white {
+            color: var(--white);
+        }
+
+        /* Scroll animation base */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* =============================================
+           NAVBAR
+           ============================================= */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all var(--transition-base);
+        }
+
+        .navbar.scrolled {
+            background: rgba(26, 86, 219, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+            padding: 0.6rem 0;
+        }
+
+        .navbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .navbar-logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+
+        .navbar-logo-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.2;
+        }
+
+        .navbar-logo-text span {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .navbar-links a {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 0.85rem;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+            position: relative;
+        }
+
+        .navbar-links a:hover {
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .navbar-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 0.65rem 1.4rem;
+            border-radius: var(--radius-full);
+            transition: all var(--transition-fast);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+            flex-shrink: 0;
+        }
+
+        .navbar-cta:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+        }
+
+        /* Mobile hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 8px;
+            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            border-radius: var(--radius-sm);
+            transition: background var(--transition-fast);
+        }
+
+        .hamburger:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: all var(--transition-base);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(320px, 85vw);
+            height: 100vh;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+            z-index: 999;
+            padding: 5rem 1.5rem 2rem;
+            transition: right var(--transition-slow);
+            box-shadow: -10px 0 40px rgba(0,0,0,0.3);
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+        }
+
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-menu-links a {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 0.85rem 1rem;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+            display: block;
+        }
+
+        .mobile-menu-links a:hover {
+            background: rgba(255,255,255,0.12);
+            color: var(--white);
+        }
+
+        .mobile-menu-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.85rem 1.5rem;
+            border-radius: var(--radius-full);
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        /* =============================================
+           HERO SECTION
+           ============================================= */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, #2563eb 100%);
+        }
+
+        /* Animated gradient background */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(59, 130, 246, 0.5) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(245, 158, 11, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 60% 80%, rgba(26, 86, 219, 0.4) 0%, transparent 50%);
+            animation: heroGradient 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGradient {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* Geometric pattern overlay */
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        /* Floating shapes */
+        .floating-shapes {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .floating-shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: var(--accent);
+            top: 10%;
+            right: 10%;
+            animation-delay: 0s;
+            animation-duration: 25s;
+        }
+
+        .floating-shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            background: var(--white);
+            bottom: 20%;
+            right: 30%;
+            animation-delay: -5s;
+            animation-duration: 20s;
+        }
+
+        .floating-shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            background: var(--accent-light);
+            top: 60%;
+            left: 5%;
+            animation-delay: -10s;
+            animation-duration: 18s;
+        }
+
+        .floating-shape:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            background: var(--white);
+            top: 20%;
+            left: 20%;
+            animation-delay: -15s;
+            animation-duration: 22s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(20px, -30px) scale(1.05); }
+            50% { transform: translate(-15px, 20px) scale(0.95); }
+            75% { transform: translate(25px, 10px) scale(1.02); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 8rem 0 5rem;
+        }
+
+        .hero-text {
+            color: var(--white);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 0.4rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.15);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-weight: 400;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 2.5rem;
+            max-width: 520px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.85rem 2rem;
+            border-radius: var(--radius-full);
+            transition: all var(--transition-fast);
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.5);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.15);
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.85rem 2rem;
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all var(--transition-fast);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-3px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: left;
+        }
+
+        .hero-stat-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+            display: block;
+        }
+
+        .hero-stat-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.75);
+            margin-top: 0.25rem;
+            display: block;
+        }
+
+        /* Hero image grid */
+        .hero-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .hero-image-card {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: transform var(--transition-base);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .hero-image-card:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .hero-image-card:nth-child(1) {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            transform: translateY(1.5rem);
+        }
+
+        .hero-image-card:nth-child(2) {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .hero-image-card:nth-child(3) {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .hero-image-card:nth-child(4) {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            transform: translateY(1.5rem);
+        }
+
+        .hero-image-label {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .hero-image-label span {
+            color: rgba(255,255,255,0.95);
+            font-size: 0.85rem;
+            font-weight: 700;
+            line-height: 1.3;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .hero-image-icon {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* =============================================
+           SERVICES SECTION
+           ============================================= */
+        .services {
+            padding: 6rem 0;
+            background: var(--light-bg);
+            position: relative;
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .services-header p {
+            font-size: 1.1rem;
+            color: var(--gray-500);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 2rem 1.75rem;
+            position: relative;
+            transition: all var(--transition-base);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-2xl);
+            border-color: transparent;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .service-icon.blue {
+            background: linear-gradient(135deg, rgba(26, 86, 219, 0.15), rgba(59, 130, 246, 0.1));
+            color: var(--primary);
+        }
+
+        .service-icon.green {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.1));
+            color: #059669;
+        }
+
+        .service-icon.amber {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.1));
+            color: var(--accent-dark);
+        }
+
+        .service-icon.purple {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(124, 58, 237, 0.1));
+            color: #7c3aed;
+        }
+
+        .service-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark-900);
+            margin-bottom: 0.75rem;
+        }
+
+        .service-desc {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+            line-height: 1.65;
+        }
+
+        .service-arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-top: 1.25rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            transition: gap var(--transition-fast);
+        }
+
+        .service-card:hover .service-arrow {
+            gap: 0.65rem;
+        }
+
+        /* =============================================
+           PORTFOLIO SECTION
+           ============================================= */
+        .portfolio {
+            padding: 6rem 0;
+            background: var(--white);
+        }
+
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            padding: 0.55rem 1.4rem;
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-500);
+            background: var(--gray-100);
+            border: 1px solid var(--gray-200);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+        }
+
+        .filter-btn:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            background: rgba(26, 86, 219, 0.05);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px rgba(26, 86, 219, 0.3);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .portfolio-card {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .portfolio-card.hidden {
+            display: none;
+        }
+
+        .portfolio-card.animating {
+            animation: portfolioFade 0.4s ease forwards;
+        }
+
+        @keyframes portfolioFade {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .portfolio-bg {
+            position: absolute;
+            inset: 0;
+            transition: transform var(--transition-slow);
+        }
+
+        .portfolio-card:hover .portfolio-bg {
+            transform: scale(1.08);
+        }
+
+        .portfolio-bg.c-1 { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .portfolio-bg.c-2 { background: linear-gradient(135deg, #10b981, #059669); }
+        .portfolio-bg.c-3 { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .portfolio-bg.c-4 { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+        .portfolio-bg.c-5 { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+        .portfolio-bg.c-6 { background: linear-gradient(135deg, #ef4444, #dc2626); }
+
+        .portfolio-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            color: var(--white);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.3rem 0.75rem;
+            border-radius: var(--radius-full);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            z-index: 2;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.75rem;
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .portfolio-card:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-overlay-content {
+            transform: translateY(20px);
+            transition: transform var(--transition-base);
+        }
+
+        .portfolio-card:hover .portfolio-overlay-content {
+            transform: translateY(0);
+        }
+
+        .portfolio-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.35rem;
+        }
+
+        .portfolio-card-desc {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.75);
+        }
+
+        /* =============================================
+           ABOUT / PROCESS SECTION
+           ============================================= */
+        .about {
+            padding: 6rem 0;
+            background: var(--dark-800);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(26, 86, 219, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .about-left p {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .about-features {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .about-feature-icon {
+            width: 28px;
+            height: 28px;
+            background: rgba(245, 158, 11, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-base);
+        }
+
+        .process-step:hover {
+            transform: translateX(10px);
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(26, 86, 219, 0.3);
+        }
+
+        .process-step-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary-light);
+            line-height: 1;
+            flex-shrink: 0;
+            opacity: 0.6;
+        }
+
+        .process-step-content h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.4rem;
+        }
+
+        .process-step-content p {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.6;
+        }
+
+        /* =============================================
+           PARTNERS SECTION
+           ============================================= */
+        .partners {
+            padding: 5rem 0;
+            background: var(--light-bg);
+        }
+
+        .partners-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .partners-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .partner-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 180px;
+            padding: 1.25rem 2rem;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--dark-700);
+            text-align: center;
+            transition: all var(--transition-base);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .partner-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .partner-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+            color: var(--white);
+            font-size: 0.85rem;
+        }
+
+        /* =============================================
+           CONTACT SECTION
+           ============================================= */
+        .contact {
+            padding: 6rem 0;
+            background: var(--white);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            padding: 1.5rem;
+            background: var(--light-bg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+            transition: all var(--transition-base);
+        }
+
+        .contact-card:hover {
+            transform: translateX(6px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .contact-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.25rem;
+            color: var(--white);
+        }
+
+        .contact-card-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-card-value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--dark-900);
+            line-height: 1.5;
+        }
+
+        .contact-card-value a {
+            transition: color var(--transition-fast);
+        }
+
+        .contact-card-value a:hover {
+            color: var(--primary);
+        }
+
+        /* Contact form */
+        .contact-form-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--gray-200);
+        }
+
+        .contact-form-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark-900);
+            margin-bottom: 1.75rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--dark-700);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: var(--dark-800);
+            transition: all var(--transition-fast);
+            background: var(--white);
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.12);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 0.9rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+            box-shadow: 0 4px 15px rgba(26, 86, 219, 0.35);
+            margin-top: 0.5rem;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(26, 86, 219, 0.45);
+        }
+
+        .form-submit:active {
+            transform: translateY(0);
+        }
+
+        /* =============================================
+           FOOTER
+           ============================================= */
+        .footer {
+            background: var(--dark-900);
+            padding: 4rem 0 2rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1rem;
+            color: var(--white);
+        }
+
+        .footer-brand-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .footer-desc {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+            color: rgba(255,255,255,0.7);
+        }
+
+        .footer-social a:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            color: var(--white);
+        }
+
+        .footer-col-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .footer-links a {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.55);
+            transition: all var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 6px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* =============================================
+           SCROLL TO TOP BUTTON
+           ============================================= */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-base);
+            z-index: 900;
+            box-shadow: 0 4px 20px rgba(26, 86, 219, 0.4);
+            border: none;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(26, 86, 219, 0.5);
+        }
+
+        /* =============================================
+           RESPONSIVE — TABLET (1024px)
+           ============================================= */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .hero-subtitle {
+                margin: 0 auto 2.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-images {
+                max-width: 480px;
+                margin: 0 auto;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-grid > div:first-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        /* =============================================
+           RESPONSIVE — MOBILE (768px)
+           ============================================= */
+        @media (max-width: 768px) {
+            .navbar-links,
+            .navbar-cta {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .mobile-menu-overlay {
+                display: block;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 7rem 0 4rem;
+            }
+
+            .hero-content {
+                padding: 5rem 0 3rem;
+            }
+
+            .hero-title {
+                font-size: 1.9rem;
+            }
+
+            .hero-images {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.75rem;
+            }
+
+            .hero-image-card:nth-child(1),
+            .hero-image-card:nth-child(4) {
+                transform: translateY(0);
+            }
+
+            .hero-image-card {
+                aspect-ratio: 1;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .hero-stat-number {
+                font-size: 1.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                margin: 0 auto;
+            }
+
+            .portfolio-overlay {
+                opacity: 1;
+            }
+
+            .portfolio-overlay-content {
+                transform: translateY(0);
+            }
+
+            .partners-row {
+                gap: 0.75rem;
+            }
+
+            .partner-item {
+                min-width: 140px;
+                padding: 1rem 1.25rem;
+                font-size: 0.8rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 0.75rem;
+                text-align: center;
+            }
+
+            .scroll-top {
+                bottom: 1.25rem;
+                right: 1.25rem;
+                width: 42px;
+                height: 42px;
+            }
+        }
+
+        /* =============================================
+           COUNTER ANIMATION
+           ============================================= */
+        .counter-animated {
+            transition: none;
+        }
+
+        /* =============================================
+           FORM ALERT
+           ============================================= */
+        .form-alert {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            font-size: 0.95rem;
+            z-index: 9999;
+            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.4);
+            transform: translateX(120%);
+            transition: transform 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .form-alert.show {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =============================================
+         NAVBAR
+         ============================================= -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar-inner">
+                <a href="#" class="navbar-logo">
+                    <div class="navbar-logo-icon">PG</div>
+                    <div class="navbar-logo-text">
+                        Playground Georgia
+                        <span>ფლეიგრაუნდ ჯორჯია</span>
+                    </div>
+                </a>
+
+                <div class="navbar-links">
+                    <a href="#home">მთავარი</a>
+                    <a href="#services">სერვისები</a>
+                    <a href="#portfolio">პორტფოლიო</a>
+                    <a href="#about">ჩვენს შესახებ</a>
+                    <a href="#contact">კონტაქტი</a>
+                </div>
+
+                <a href="tel:557950060" class="navbar-cta">
+                    <span>📞</span> დაგვირეკეთ
+                </a>
+
+                <button class="hamburger" id="hamburger" aria-label="მენიუ">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-links">
+            <a href="#home" class="mobile-link">მთავარი</a>
+            <a href="#services" class="mobile-link">სერვისები</a>
+            <a href="#portfolio" class="mobile-link">პორტფოლიო</a>
+            <a href="#about" class="mobile-link">ჩვენს შესახებ</a>
+            <a href="#contact" class="mobile-link">კონტაქტი</a>
+        </div>
+        <a href="tel:557950060" class="mobile-menu-cta">
+            📞 დაგვირეკეთ: 557 95 00 60
+        </a>
+    </div>
+
+    <!-- =============================================
+         HERO SECTION
+         ============================================= -->
+    <section class="hero" id="home">
+        <div class="hero-pattern"></div>
+        <div class="floating-shapes">
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+        </div>
+
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">🏗️ 10+ წლიანი გამოცდილება</div>
+                    <h1 class="hero-title">შექმენით ბავშვებისთვის იდეალური სივრცე</h1>
+                    <p class="hero-subtitle">
+                        ჩვენ ვაშენებთ თანამედროვე სათამაშო მოედნებს, სპორტულ კომპლექსებს და ვაინსტალირებთ უმაღლესი ხარისხის რეზინის საფარებს საქართველოს მასშტაბით.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#portfolio" class="btn-primary">
+                            🚀 პროექტები
+                        </a>
+                        <a href="#contact" class="btn-secondary">
+                            💬 კონსულტაცია
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-number" data-target="500">0</span>
+                            <span class="hero-stat-label">განხორციელებული პროექტი</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number" data-target="10">0</span>
+                            <span class="hero-stat-label">წლიანი გამოცდილება</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number" data-target="50">0</span>
+                            <span class="hero-stat-label">მუნიციპალიტეტი</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-images">
+                    <div class="hero-image-card">
+                        <div class="hero-image-icon">🎠</div>
+                        <div class="hero-image-label">
+                            <span>სათამაშო<br>მოედნები</span>
+                        </div>
+                    </div>
+                    <div class="hero-image-card">
+                        <div class="hero-image-icon">🏀</div>
+                        <div class="hero-image-label">
+                            <span>სპორტული<br>სტადიონები</span>
+                        </div>
+                    </div>
+                    <div class="hero-image-card">
+                        <div class="hero-image-icon">🏗️</div>
+                        <div class="hero-image-label">
+                            <span>რეზინის<br>საფარები</span>
+                        </div>
+                    </div>
+                    <div class="hero-image-card">
+                        <div class="hero-image-icon">🎨</div>
+                        <div class="hero-image-label">
+                            <span>ინდივიდუალური<br>პროექტები</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         SERVICES SECTION
+         ============================================= -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="services-header reveal">
+                <span class="section-tag">სერვისები</span>
+                <h2 class="section-title">რას გთავაზობთ?</h2>
+                <p>ჩვენ გთავაზობთ სრულ სპექტრს საბავშვო და სპორტული ინფრასტრუქტურის მოწყობისა, ევროპული ხარისხის მასალებით და საერთაშორისო სტანდარტების დაცვით.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card reveal reveal-delay-1">
+                    <div class="service-icon blue">🎠</div>
+                    <h3 class="service-title">ბავშვთა სათამაშო მოედნები</h3>
+                    <p class="service-desc">თანამედროვე, უსაფრთხო და ფუნქციური სათამაშო კომპლექსები საერთაშორისო უსაფრთხოების სტანდარტების სრული დაცვით. EN-1176 სერთიფიცირებული მოწყობილობები.</p>
+                    <div class="service-arrow">მეტი ინფო <span>→</span></div>
+                </div>
+
+                <div class="service-card reveal reveal-delay-2">
+                    <div class="service-icon green">🏀</div>
+                    <h3 class="service-title">სპორტული მოედნები</h3>
+                    <p class="service-desc">კალათბურთის, ფეხბურთის, ჩოგნისა და სხვა სპორტული მოედნების მოწყობა აკრილისა და PU საფარებით. პროფესიონალური დონე.</p>
+                    <div class="service-arrow">მეტი ინფო <span>→</span></div>
+                </div>
+
+                <div class="service-card reveal reveal-delay-3">
+                    <div class="service-icon amber">🏗️</div>
+                    <h3 class="service-title">რეზინის საფარები</h3>
+                    <p class="service-desc">EPDM და SBR რეზინის საფარები — ანტიტრავმული, სტაბილური, ყველა ამინდისათვის გამძლე. იდეალური სათამაშო და სპორტული ზონებისთვის.</p>
+                    <div class="service-arrow">მეტი ინფო <span>→</span></div>
+                </div>
+
+                <div class="service-card reveal reveal-delay-4">
+                    <div class="service-icon purple">🎨</div>
+                    <h3 class="service-title">ინდივიდუალური პროექტები</h3>
+                    <p class="service-desc">უნიკალური დიზაინის პარკები, მოედნები და საზოგადოებრივი სივრცეები. 3D ვიზუალიზაცია, სრული პროექტირება და ჩაბარება.</p>
+                    <div class="service-arrow">მეტი ინფო <span>→</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         PORTFOLIO SECTION
+         ============================================= -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="portfolio-header reveal">
+                <span class="section-tag">პორტფოლიო</span>
+                <h2 class="section-title">განხორციელებული პროექტები</h2>
+            </div>
+
+            <div class="portfolio-filters reveal">
+                <button class="filter-btn active" data-filter="all">ყველა</button>
+                <button class="filter-btn" data-filter="toy">სათამაშო</button>
+                <button class="filter-btn" data-filter="sport">სპორტული</button>
+                <button class="filter-btn" data-filter="surface">საფარები</button>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-card reveal" data-category="toy">
+                    <div class="portfolio-bg c-1"></div>
+                    <span class="portfolio-badge">სათამაშო</span>
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-overlay-content">
+                            <h3 class="portfolio-card-title">თბილისის სკვერი #144</h3>
+                            <p class="portfolio-card-desc">სრული რეკონსტრუქცია — 850 მ², რეზინის საფარით</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card reveal" data-category="sport">
+                    <div class="portfolio-bg c-2"></div>
+                    <span class="portfolio-badge">სპორტული</span>
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-overlay-content">
+                            <h3 class="portfolio-card-title">სპორტული კომპლექსი</h3>
+                            <p class="portfolio-card-desc">კალათბურთისა და მინი-ფეხბურთის მოედანი, PU საფარი</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card reveal" data-category="surface">
+                    <div class="portfolio-bg c-3"></div>
+                    <span class="portfolio-badge">საფარი</span>
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-overlay-content">
+                            <h3 class="portfolio-card-title">EPDM რეზინის საფარი</h3>
+                            <p class="portfolio-card-desc">3,200 მ² EPDM მონტაჟი — ბაღსა და სკოლაში</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card reveal" data-category="toy">
+                    <div class="portfolio-bg c-4"></div>
+                    <span class="portfolio-badge">სათამაშო</span>
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-overlay-content">
+                            <h3 class="portfolio-card-title">ბავშვთა გასართობი ზონა</h3>
+                            <p class="portfolio-card-desc">ინდივიდუალური დიზაინი, 12 სათამაშო ელემენტი</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card reveal" data-category="sport">
+                    <div class="portfolio-bg c-5"></div>
+                    <span class="portfolio-badge">სპორტული</span>
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-overlay-content">
+                            <h3 class="portfolio-card-title">მინი-ფეხბურთის მოედანი</h3>
+                            <p class="portfolio-card-desc">სტანდარტული ზომა, აკრილის საფარი, გარანტიით</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card reveal" data-category="surface">
+                    <div class="portfolio-bg c-6"></div>
+                    <span class="portfolio-badge">საფარი</span>
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-overlay-content">
+                            <h3 class="portfolio-card-title">PU საფარი სკოლაში</h3>
+                            <p class="portfolio-card-desc">სპორტული დარბაზი — 1,400 მ² PU მონტაჟი</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         ABOUT / PROCESS SECTION
+         ============================================= -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-left reveal">
+                    <span class="section-tag dark">ჩვენს შესახებ</span>
+                    <h2 class="section-title white">რატომ Playground Georgia?</h2>
+                    <p>
+                        ჩვენ ვართ საქართველოს ლიდერი კომპანია ბავშვთა სათამაშო მოედნებისა და სპორტული ინფრასტრუქტურის მოწყობის სფეროში. ბოლო 10 წლის განმავლობაში ჩვენ განვახორციელეთ 500-ზე მეტი პროექტი თბილისსა და რეგიონებში.
+                    </p>
+                    <p>
+                        ვთანამშრომლობთ თბილისის მერიასთან, სკოლებთან, ბაგა-ბაღებთან და კერძო სექტორთან. ჩვენი მისიაა — შევქმნათ სივრცეები, სადაც ბავშვები და ახალგაზრდები უსაფრთხოდ და ბედნიერად ივლიან.
+                    </p>
+
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="about-feature-icon">✓</div>
+                            <span>ევროპული ხარისხის მასალები</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">✓</div>
+                            <span>ISO სერთიფიცირებული მოწყობილობები</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">✓</div>
+                            <span>სრული გარანტია ყველა პროექტზე</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">✓</div>
+                            <span>მუნიციპალური და კერძო პროექტები</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">✓</div>
+                            <span>პროფესიონალური მონტაჟის ჯგუფი</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-steps reveal">
+                    <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 1.75rem;">ჩვენი პროცესი</h3>
+
+                    <div class="process-step">
+                        <div class="process-step-number">01</div>
+                        <div class="process-step-content">
+                            <h4>კონსულტაცია და გაზომვა</h4>
+                            <p>უფასო კონსულტაცია ადგილზე. სივრცის გაზომვა, საჭიროებების განსაზღვრა და პროექტის შეფასება.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="process-step-number">02</div>
+                        <div class="process-step-content">
+                            <h4>პროექტირება</h4>
+                            <p>3D ვიზუალიზაცია, მასალების არჩევანი, სპეციფიკაციები და საბოლოო შეთავაზების მომზადება.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="process-step-number">03</div>
+                        <div class="process-step-content">
+                            <h4>მონტაჟი და ჩაბარება</h4>
+                            <p>პროფესიონალური მონტაჟი, ხარისხის კონტროლი, საბოლოო ჩაბარება და გარანტიის მიცემა.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         PARTNERS SECTION
+         ============================================= -->
+    <section class="partners" id="partners">
+        <div class="container">
+            <div class="partners-header reveal">
+                <span class="section-tag">პარტნიორები</span>
+                <h2 class="section-title">ვინც ჩვენ გვენდობა</h2>
+            </div>
+
+            <div class="partners-row reveal">
+                <div class="partner-item">
+                    <div class="partner-icon">🏛️</div>
+                    თბილისის მერია
+                </div>
+                <div class="partner-item">
+                    <div class="partner-icon">🏉</div>
+                    საქართველოს რაგბი
+                </div>
+                <div class="partner-item">
+                    <div class="partner-icon">🏫</div>
+                    სკოლების ქსელი
+                </div>
+                <div class="partner-item">
+                    <div class="partner-icon">🎓</div>
+                    ბაგა-ბაღების სააგენტო
+                </div>
+                <div class="partner-item">
+                    <div class="partner-icon">🌍</div>
+                    მუნიციპალიტეტები
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         CONTACT SECTION
+         ============================================= -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-header reveal">
+                <span class="section-tag">კონტაქტი</span>
+                <h2 class="section-title">დაგვიკავშირდით</h2>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-cards">
+                    <div class="contact-card reveal">
+                        <div class="contact-card-icon">📞</div>
+                        <div>
+                            <div class="contact-card-label">ტელეფონი</div>
+                            <div class="contact-card-value">
+                                <a href="tel:557950060">557 95 00 60</a><br>
+                                <a href="tel:591805700">591 80 57 00</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-card reveal">
+                        <div class="contact-card-icon">✉️</div>
+                        <div>
+                            <div class="contact-card-label">Email</div>
+                            <div class="contact-card-value">
+                                <a href="mailto:playgroundgeorgia@gmail.com">playgroundgeorgia@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-card reveal">
+                        <div class="contact-card-icon">📍</div>
+                        <div>
+                            <div class="contact-card-label">მისამართი</div>
+                            <div class="contact-card-value">საქართველო, თბილისი</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-card reveal">
+                        <div class="contact-card-icon">🕐</div>
+                        <div>
+                            <div class="contact-card-label">სამუშაო საათები</div>
+                            <div class="contact-card-value">ორშაბათი - შაბათი<br>09:00 - 18:00</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-card reveal">
+                        <div class="contact-card-icon">📱</div>
+                        <div>
+                            <div class="contact-card-label">Facebook</div>
+                            <div class="contact-card-value">
+                                <a href="https://www.facebook.com/Playgroundgeorgia" target="_blank" rel="noopener">@Playgroundgeorgia</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-card reveal">
+                    <h3 class="contact-form-title">გამოგვიგზავნეთ შეტყობინება</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label class="form-label" for="name">სახელი და გვარი *</label>
+                            <input type="text" id="name" class="form-input" placeholder="თქვენი სახელი და გვარი" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="phone">ტელეფონი *</label>
+                            <input type="tel" id="phone" class="form-input" placeholder="555 00 00 00" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="projectType">პროექტის ტიპი</label>
+                            <select id="projectType" class="form-select">
+                                <option value="">აირჩიეთ პროექტის ტიპი</option>
+                                <option value="toy">ბავშვთა სათამაშო მოედანი</option>
+                                <option value="sport">სპორტული მოედანი</option>
+                                <option value="surface">რეზინის საფარი</option>
+                                <option value="custom">ინდივიდუალური პროექტი</option>
+                                <option value="other">სხვა</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="message">შეტყობინება</label>
+                            <textarea id="message" class="form-textarea" placeholder="დაწერეთ თქვენი შეკითხვა ან პროექტის აღწერა..."></textarea>
+                        </div>
+
+                        <button type="submit" class="form-submit">📨 გაგზავნა</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         FOOTER
+         ============================================= -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">
+                        <div class="footer-brand-icon">PG</div>
+                        <div class="footer-brand-name">Playground Georgia</div>
+                    </div>
+                    <p class="footer-desc">
+                        ჩვენ ვქმნით ბავშვებისა და ახალგაზრდებისთვის უსაფრთხო, თანამედროვე და საინტერესო სივრცეებს საქართველოს მასშტაბით. 10+ წლიანი გამოცდილება, 500+ წარმატებული პროექტი.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/Playgroundgeorgia" target="_blank" rel="noopener" title="Facebook">📘</a>
+                        <a href="#" title="Instagram">📷</a>
+                        <a href="#" title="YouTube">▶️</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">სწრაფი ლინკები</h4>
+                    <div class="footer-links">
+                        <a href="#home">მთავარი</a>
+                        <a href="#services">სერვისები</a>
+                        <a href="#portfolio">პორტფოლიო</a>
+                        <a href="#about">ჩვენს შესახებ</a>
+                        <a href="#contact">კონტაქტი</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">სერვისები</h4>
+                    <div class="footer-links">
+                        <a href="#services">სათამაშო მოედნები</a>
+                        <a href="#services">სპორტული მოედნები</a>
+                        <a href="#services">რეზინის საფარები</a>
+                        <a href="#services">ინდივიდუალური პროექტები</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>© 2025 Playground Georgia. ყველა უფლება დაცულია.</span>
+                <span>თბილისი, საქართველო</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top -->
+    <button class="scroll-top" id="scrollTop" aria-label="დაბრუნება თავში">↑</button>
+
+    <!-- Form alert -->
+    <div class="form-alert" id="formAlert">
+        <span>✅</span>
+        <span>შეტყობინება წარმატებით გაიგზავნა!</span>
+    </div>
+
+    <!-- =============================================
+         JAVASCRIPT
+         ============================================= -->
+    <script>
+        /* ---- Navbar scroll effect ---- */
+        const navbar = document.getElementById('navbar');
+        const scrollTopBtn = document.getElementById('scrollTop');
+
+        function handleScroll() {
+            const scrollY = window.scrollY;
+            
+            // Navbar glassmorphism
+            if (scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Scroll to top button
+            if (scrollY > 600) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+
+        /* ---- Scroll to top ---- */
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        /* ---- Mobile menu ---- */
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMobileMenu() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMobileMenu);
+        mobileOverlay.addEventListener('click', toggleMobileMenu);
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        /* ---- Scroll reveal (Intersection Observer) ---- */
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        /* ---- Counter animation ---- */
+        const counters = document.querySelectorAll('.hero-stat-number[data-target]');
+        let countersAnimated = false;
+
+        function animateCounters() {
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 2000;
+                const start = performance.now();
+
+                function updateCounter(currentTime) {
+                    const elapsed = currentTime - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    // Ease out cubic
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.floor(eased * target);
+                    counter.textContent = current + '+';
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
+                    }
+                }
+
+                requestAnimationFrame(updateCounter);
+            });
+        }
+
+        const heroStats = document.querySelector('.hero-stats');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !countersAnimated) {
+                    countersAnimated = true;
+                    animateCounters();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        if (heroStats) counterObserver.observe(heroStats);
+
+        /* ---- Portfolio filter ---- */
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.getAttribute('data-filter');
+
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Filter cards
+                portfolioCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    const shouldShow = filter === 'all' || category === filter;
+
+                    if (shouldShow) {
+                        card.classList.remove('hidden');
+                        card.classList.add('animating');
+                        // Re-trigger animation
+                        card.style.animation = 'none';
+                        card.offsetHeight; // force reflow
+                        card.style.animation = '';
+                    } else {
+                        card.classList.add('hidden');
+                        card.classList.remove('animating');
+                    }
+                });
+            });
+        });
+
+        /* ---- Contact form ---- */
+        const contactForm = document.getElementById('contactForm');
+        const formAlert = document.getElementById('formAlert');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Show success alert
+            formAlert.classList.add('show');
+
+            // Reset form
+            contactForm.reset();
+
+            // Hide alert after 4 seconds
+            setTimeout(() => {
+                formAlert.classList.remove('show');
+            }, 4000);
+        });
+
+        /* ---- Smooth scroll for anchor links ---- */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetEl = document.querySelector(targetId);
+                if (targetEl) {
+                    const navbarHeight = navbar.offsetHeight;
+                    const targetPosition = targetEl.getBoundingClientRect().top + window.scrollY - navbarHeight;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
