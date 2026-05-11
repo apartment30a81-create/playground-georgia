@@ -190,15 +190,19 @@
         .navbar-logo-icon {
             width: 44px;
             height: 44px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 900;
-            font-size: 1.1rem;
-            color: var(--white);
+            overflow: hidden;
+            flex-shrink: 0;
             box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+
+        .navbar-logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .navbar-logo-text {
@@ -1298,14 +1302,18 @@
         .footer-brand-icon {
             width: 44px;
             height: 44px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 900;
-            font-size: 1rem;
-            color: var(--white);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .footer-brand-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .footer-brand-name {
@@ -1620,7 +1628,7 @@
         <div class="container">
             <div class="navbar-inner">
                 <a href="#" class="navbar-logo">
-                    <div class="navbar-logo-icon">PG</div>
+                    <div class="navbar-logo-icon"><img src="logo.jpg" alt="Playground Georgia Logo"></div>
                     <div class="navbar-logo-text">
                         Playground Georgia
                         <span>ფლეიგრაუნდ ჯორჯია</span>
@@ -2078,7 +2086,7 @@
             <div class="footer-grid">
                 <div>
                     <div class="footer-brand">
-                        <div class="footer-brand-icon">PG</div>
+                        <div class="footer-brand-icon"><img src="logo.jpg" alt="Playground Georgia Logo"></div>
                         <div class="footer-brand-name">Playground Georgia</div>
                     </div>
                     <p class="footer-desc">
